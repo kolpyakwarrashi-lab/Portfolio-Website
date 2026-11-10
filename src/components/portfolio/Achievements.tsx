@@ -22,7 +22,7 @@ export function Achievements() {
           className="mt-6 block max-w-3xl font-display text-4xl font-bold leading-[1.02] md:text-6xl"
         />
 
-        <ol className="mt-16 border-t">
+        <ol className="mt-16 grid auto-rows-fr border-t">
           {entries.map((a, i) => (
             <motion.li
               key={a.title}
