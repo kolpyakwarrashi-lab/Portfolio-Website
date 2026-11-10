@@ -60,7 +60,7 @@ export function Nav() {
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
                   />
                 )}
-                {l.label}
+                <span>{l.label}</span>
               </a>
             </li>
           ))}
@@ -69,7 +69,7 @@ export function Nav() {
         <div className="flex items-center gap-2">
           <Button asChild variant="hero" size="sm" className="hidden px-4 sm:inline-flex">
             <a href={profile.resumeUrl} download={profile.resumeFileName} target="_blank" rel="noreferrer">
-              <Download /> Resume
+              <Download /> <span>Resume</span>
             </a>
           </Button>
           <button
@@ -107,7 +107,7 @@ export function Nav() {
             </ul>
             <Button asChild variant="hero" size="xl" className="mt-3 w-full">
               <a href={profile.resumeUrl} download={profile.resumeFileName} target="_blank" rel="noreferrer">
-                <Download /> Download Resume
+                <Download /> <span>Download Resume</span>
               </a>
             </Button>
           </motion.div>

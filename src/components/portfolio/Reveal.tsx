@@ -60,8 +60,7 @@ export function StaggerText({
             className="inline-block"
             variants={{ hidden: { y: "110%" }, show: { y: 0, transition: { duration: 0.9, ease } } }}
           >
-            {w}
-            {i < words.length - 1 ? "\u00A0" : ""}
+            {i < words.length - 1 ? `${w}\u00A0` : w}
           </motion.span>
         </span>
       ))}

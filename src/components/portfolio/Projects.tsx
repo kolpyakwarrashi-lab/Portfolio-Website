@@ -122,7 +122,7 @@ function ProjectCard({ project, onOpen, flip }: { project: Project; onOpen: (s: 
             {project.live ? (
               <Button asChild variant="hero" size="xl">
                 <a href={project.live} target="_blank" rel="noreferrer">
-                  Live Demo <ArrowUpRight />
+                  <span>Live Demo</span> <ArrowUpRight />
                 </a>
               </Button>
             ) : (
@@ -133,7 +133,7 @@ function ProjectCard({ project, onOpen, flip }: { project: Project; onOpen: (s: 
             {project.github && (
               <Button asChild variant="glass" size="xl">
                 <a href={project.github} target="_blank" rel="noreferrer">
-                  <Github /> GitHub
+                  <Github /> <span>GitHub</span>
                 </a>
               </Button>
             )}
