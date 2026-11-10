@@ -60,7 +60,7 @@ export function Nav() {
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
                   />
                 )}
-                {l.label}
+                <span>{l.label}</span>
               </a>
             </li>
           ))}
