@@ -30,7 +30,7 @@ export function Achievements() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.05 }}
-              className="group relative grid min-h-[4.5rem] grid-cols-[3rem_1fr_auto] items-center gap-4 overflow-hidden border-b py-7 md:min-h-[6rem] md:grid-cols-[5rem_1fr_14rem_auto] md:py-8"
+              className="group relative grid min-h-[4.5rem] grid-cols-[2.5rem_1fr] items-center gap-x-4 gap-y-3 overflow-hidden border-b py-7 md:min-h-[6rem] md:grid-cols-[5rem_1fr_14rem_auto] md:py-8"
             >
               <span
                 aria-hidden
