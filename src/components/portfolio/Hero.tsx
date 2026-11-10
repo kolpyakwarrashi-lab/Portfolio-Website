@@ -146,7 +146,7 @@ export function Hero() {
             transition={{ duration: 1, ease, delay: 0.85 }}
             className="font-display text-5xl font-bold leading-[0.95] sm:text-7xl md:text-8xl"
           >
-            Beyond the <span className="text-gradient">Code.</span>
+            Rashi Kolpyakwar
           </motion.h2>
           <motion.p
             initial={reduce ? false : { opacity: 0, y: 20 }}
@@ -154,7 +154,7 @@ export function Hero() {
             transition={{ duration: 0.9, ease, delay: 0.7 }}
             className="eyebrow mt-5 text-muted-foreground"
           >
-            {profile.fullName} — {profile.role}
+            &nbsp;COMPUTER SCIENCE &amp; ENGINEERING STUDENT
           </motion.p>
           <motion.p
             initial={reduce ? false : { opacity: 0, y: 20 }}
