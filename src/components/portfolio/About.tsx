@@ -17,7 +17,7 @@ export function About() {
   const imgY = useTransform(scrollYProgress, [0, 1], ["8%", "-8%"]);
 
   return (
-    <section id="about" className="relative bg-background py-28 text-foreground md:py-36">
+    <section id="about" className="relative overflow-hidden bg-background py-28 text-foreground md:py-36">
       <div ref={ref} className="mx-auto grid max-w-6xl gap-16 px-5 md:grid-cols-12">
         <div className="md:col-span-7">
           <SectionLabel index="01">About me</SectionLabel>
