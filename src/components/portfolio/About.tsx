@@ -1,7 +1,7 @@
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { profile } from "@/content/portfolio";
-import { Reveal, SectionLabel, StaggerText } from "./Reveal";
+import { Reveal, SectionLabel, StaggerText, useReducedMotion } from "./Reveal";
 
 const facts = [
   { k: "Studying", v: "B.E. Computer Science & Engineering" },

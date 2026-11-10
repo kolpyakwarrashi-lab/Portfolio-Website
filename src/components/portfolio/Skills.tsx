@@ -1,8 +1,8 @@
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { Code2, LayoutTemplate, Palette, Sprout, Users, Wrench } from "lucide-react";
 import { skillGroups, skillLevelLabel, type SkillLevel } from "@/content/portfolio";
 import { cn } from "@/lib/utils";
-import { Reveal, SectionLabel, StaggerText } from "./Reveal";
+import { Reveal, SectionLabel, StaggerText, useReducedMotion } from "./Reveal";
 
 const icons = { code: Code2, layout: LayoutTemplate, wrench: Wrench, palette: Palette, sprout: Sprout, users: Users };
 

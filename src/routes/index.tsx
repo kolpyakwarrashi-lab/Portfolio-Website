@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { MotionConfig } from "motion/react";
 import { Nav } from "@/components/portfolio/Nav";
 import { Hero } from "@/components/portfolio/Hero";
 import { Marquee } from "@/components/portfolio/Marquee";
@@ -30,7 +31,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <a href="#about" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground">
         Skip to content
       </a>
@@ -46,6 +47,6 @@ function Index() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </MotionConfig>
   );
 }

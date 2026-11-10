@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { ArrowUpRight, Expand, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { moreProjects, projects, type Project, type Shot } from "@/content/portfolio";
 import { cn } from "@/lib/utils";
-import { Reveal, SectionLabel, StaggerText } from "./Reveal";
+import { Reveal, SectionLabel, StaggerText, useReducedMotion } from "./Reveal";
 
 function ShotButton({ shot, onOpen, className, priority }: { shot: Shot; onOpen: (s: Shot) => void; className?: string; priority?: boolean }) {
   return (

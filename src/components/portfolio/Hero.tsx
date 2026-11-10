@@ -1,9 +1,9 @@
+import { useReducedMotion } from "./Reveal";
 import { useRef } from "react";
 import {
   motion,
   useMotionTemplate,
   useMotionValue,
-  useReducedMotion,
   useScroll,
   useSpring,
   useTransform,

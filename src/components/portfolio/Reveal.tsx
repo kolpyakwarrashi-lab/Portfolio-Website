@@ -1,4 +1,13 @@
-import { motion, useReducedMotion, type HTMLMotionProps } from "motion/react";
+import { useEffect, useState } from "react";
+import { motion, useReducedMotion as useMotionReducedMotion, type HTMLMotionProps } from "motion/react";
+
+/** Reduced-motion preference that stays false during SSR/hydration to avoid mismatches. */
+export function useReducedMotion() {
+  const prefers = useMotionReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  return mounted && !!prefers;
+}
 
 const ease = [0.22, 1, 0.36, 1] as const;
 

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { ArrowUpRight, Award } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { achievements, certificates } from "@/content/portfolio";
-import { SectionLabel, StaggerText } from "./Reveal";
+import { SectionLabel, StaggerText, useReducedMotion } from "./Reveal";
 
 export function Achievements() {
   const reduce = useReducedMotion();

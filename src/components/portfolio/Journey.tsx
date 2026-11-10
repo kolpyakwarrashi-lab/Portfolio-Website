@@ -1,7 +1,7 @@
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { education } from "@/content/portfolio";
-import { Reveal, SectionLabel, StaggerText } from "./Reveal";
+import { Reveal, SectionLabel, StaggerText, useReducedMotion } from "./Reveal";
 
 export function Journey() {
   const ref = useRef<HTMLOListElement>(null);
