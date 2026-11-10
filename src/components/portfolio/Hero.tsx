@@ -126,13 +126,13 @@ export function Hero() {
               </div>
 
               <Chip className="-left-4 top-24 sm:-left-24" delay={1.0}>
-                <GraduationCap className="size-3.5 text-sky" /> CSE · {profile.year}
+                <GraduationCap className="size-3.5 text-sky" /> <span>{`CSE · ${profile.year}`}</span>
               </Chip>
               <Chip className="-right-4 top-44 sm:-right-28" delay={1.15}>
-                <Code2 className="size-3.5 text-primary" /> Aspiring Full-Stack
+                <Code2 className="size-3.5 text-primary" /> <span>Aspiring Full-Stack</span>
               </Chip>
               <Chip className="-left-4 bottom-28 sm:-left-20" delay={1.3}>
-                <Sparkles className="size-3.5 text-sky" /> {profile.collegeShort}
+                <Sparkles className="size-3.5 text-sky" /> <span>{profile.collegeShort}</span>
               </Chip>
             </motion.div>
           </div>
@@ -154,7 +154,7 @@ export function Hero() {
             transition={{ duration: 0.9, ease, delay: 0.7 }}
             className="eyebrow mt-5 text-muted-foreground"
           >
-            &nbsp;COMPUTER SCIENCE &amp; ENGINEERING STUDENT
+            {"\u00a0COMPUTER SCIENCE & ENGINEERING STUDENT"}
           </motion.p>
           <motion.p
             initial={reduce ? false : { opacity: 0, y: 20 }}
@@ -172,12 +172,12 @@ export function Hero() {
           >
             <Button asChild variant="hero" size="xl">
               <a href="#work">
-                Explore My Work <ArrowDown />
+                <span>Explore My Work</span> <ArrowDown />
               </a>
             </Button>
             <Button asChild variant="glass" size="xl">
               <a href="#contact">
-                Let's Connect <ArrowUpRight />
+                <span>Let's Connect</span> <ArrowUpRight />
               </a>
             </Button>
           </motion.div>

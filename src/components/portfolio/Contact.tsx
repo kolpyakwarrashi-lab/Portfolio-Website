@@ -108,7 +108,11 @@ export function Contact() {
             </div>
 
             <Button type="submit" variant="hero" size="xl" className="mt-8 w-full">
-              {sent ? <><Check /> Opening your email app</> : <>Send message <Send /></>}
+              {sent ? (
+                <span key="sent" className="inline-flex items-center gap-2"><Check /><span>Opening your email app</span></span>
+              ) : (
+                <span key="send" className="inline-flex items-center gap-2"><span>Send message</span><Send /></span>
+              )}
             </Button>
             {sent && (
               <p role="status" className="mt-4 text-center text-sm text-muted-foreground">
