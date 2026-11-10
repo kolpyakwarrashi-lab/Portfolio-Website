@@ -42,9 +42,13 @@ function Gallery({ project, onOpen }: { project: Project; onOpen: (s: Shot) => v
     <div className="grid grid-cols-3 gap-3">
       <ShotButton shot={main} onOpen={onOpen} className={cn("aspect-[16/10]", tall ? "col-span-2" : "col-span-3")} />
       {tall && <ShotButton shot={tall} onOpen={onOpen} className="col-span-1 h-full" />}
-      {wides.map((s) => (
-        <ShotButton key={s.src} shot={s} onOpen={onOpen} className={cn("aspect-[16/9]", wides.length === 1 ? "col-span-3" : "col-span-3 sm:col-span-1 sm:[&:nth-child(3)]:col-span-1")} />
-      ))}
+      {wides.length > 0 && (
+        <div className={cn("col-span-3 grid gap-3", wides.length > 1 && "sm:grid-cols-2")}>
+          {wides.map((s) => (
+            <ShotButton key={s.src} shot={s} onOpen={onOpen} className="aspect-[16/9]" />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
