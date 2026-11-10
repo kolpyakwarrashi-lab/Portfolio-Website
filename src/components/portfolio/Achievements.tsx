@@ -45,7 +45,7 @@ export function Achievements() {
               </div>
               {a.org.trim() && <p className="relative hidden text-muted-foreground md:block">{a.org.trim()}</p>}
               {a.detail.trim() && (
-                <span className="relative flex items-center gap-2 rounded-full border bg-card px-3 py-1.5 text-xs font-medium">
+                <span className="relative col-start-2 flex w-fit items-center gap-2 rounded-full border bg-card px-3 py-1.5 text-xs font-medium md:col-start-auto">
                   <Award className="size-3.5 text-primary" /> {a.detail.trim()}
                 </span>
               )}
