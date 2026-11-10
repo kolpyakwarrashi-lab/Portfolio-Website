@@ -36,7 +36,14 @@ export function Journey() {
               className="absolute left-[11px] top-2 h-[calc(100%-1rem)] w-px origin-top bg-gradient-to-b from-primary to-sky"
             />
             {education.map((e, i) => (
-              <Reveal as-child="true" key={e.title} delay={i * 0.08} className="relative pb-14 pl-12 last:pb-0">
+              <motion.li
+                key={e.title}
+                initial={reduce ? false : { opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 }}
+                className="relative pb-14 pl-12 last:pb-0"
+              >
                 <span
                   aria-hidden
                   className={`absolute left-0 top-1.5 flex size-6 items-center justify-center rounded-full border ${
@@ -45,7 +52,7 @@ export function Journey() {
                 >
                   <span className={`size-2 rounded-full ${e.current ? "bg-gradient-brand" : "bg-muted-foreground"}`} />
                 </span>
-                <li className="list-none">
+                <div>
                   <p className="eyebrow text-sky">{e.period}</p>
                   <h3 className="mt-3 font-display text-2xl font-semibold md:text-3xl">{e.title}</h3>
                   <p className="mt-1 text-muted-foreground">{e.place}</p>
@@ -53,8 +60,8 @@ export function Journey() {
                     <span className="font-display text-3xl font-bold text-gradient">{e.highlight}</span>
                     <span className="text-sm text-muted-foreground">{e.note}</span>
                   </div>
-                </li>
-              </Reveal>
+                </div>
+              </motion.li>
             ))}
           </ol>
         </div>
