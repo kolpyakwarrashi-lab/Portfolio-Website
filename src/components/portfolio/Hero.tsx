@@ -125,13 +125,13 @@ export function Hero() {
                 )}
               </div>
 
-              <Chip className="-left-10 top-24 sm:-left-24" delay={1.0}>
+              <Chip className="-left-4 top-24 sm:-left-24" delay={1.0}>
                 <GraduationCap className="size-3.5 text-sky" /> CSE · {profile.year}
               </Chip>
-              <Chip className="-right-8 top-44 sm:-right-28" delay={1.15}>
+              <Chip className="-right-4 top-44 sm:-right-28" delay={1.15}>
                 <Code2 className="size-3.5 text-primary" /> Aspiring Full-Stack
               </Chip>
-              <Chip className="-left-6 bottom-24 sm:-left-20" delay={1.3}>
+              <Chip className="-left-4 bottom-28 sm:-left-20" delay={1.3}>
                 <Sparkles className="size-3.5 text-sky" /> {profile.collegeShort}
               </Chip>
             </motion.div>

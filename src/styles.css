@@ -150,6 +150,7 @@
     html { scroll-behavior: auto; }
   }
   body {
+    overflow-x: clip;
     background-color: var(--midnight);
     color: var(--color-foreground);
     font-family: var(--font-sans);
