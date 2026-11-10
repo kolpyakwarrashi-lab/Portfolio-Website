@@ -36,7 +36,7 @@ export function Nav() {
         aria-label="Main"
         className={cn(
           "mx-auto flex max-w-6xl items-center justify-between rounded-full px-4 py-2.5 text-foreground transition-all duration-500 md:px-6",
-          scrolled ? "glass shadow-soft" : "border border-transparent",
+          scrolled ? "border bg-background/85 shadow-soft backdrop-blur-xl" : "border border-transparent",
         )}
       >
         <a href="#top" className="font-display text-base font-bold tracking-tight">
