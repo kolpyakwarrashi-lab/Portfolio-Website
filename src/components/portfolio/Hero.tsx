@@ -33,7 +33,7 @@ function Chip({
     >
       <motion.span
         className="flex items-center gap-2"
-        animate={reduce ? undefined : { y: [0, -6, 0] }}
+        animate={reduce ? {} : { y: [0, -6, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay }}
       >
         {children}
@@ -80,7 +80,7 @@ export function Hero() {
       <div className="relative mx-auto flex max-w-6xl flex-col items-center px-5">
         {/* Giant name behind portrait */}
         <motion.h1
-          style={reduce ? undefined : { y: nameY }}
+          style={reduce ? {} : { y: nameY }}
           initial={reduce ? false : { opacity: 0, letterSpacing: "0.2em" }}
           animate={{ opacity: 1, letterSpacing: "-0.04em" }}
           transition={{ duration: 1.4, ease }}
@@ -92,7 +92,7 @@ export function Hero() {
 
         {/* Portrait */}
         <motion.div
-          style={reduce ? undefined : { y: portraitY }}
+          style={reduce ? {} : { y: portraitY }}
           className="relative z-10 mt-6 [perspective:1200px]"
           initial={reduce ? false : { opacity: 0, y: 60, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -100,7 +100,7 @@ export function Hero() {
         >
           <div onPointerMove={onMove} onPointerLeave={onLeave} className="relative">
             <motion.div
-              style={reduce ? undefined : { rotateX, rotateY, transformStyle: "preserve-3d" }}
+              style={reduce ? {} : { rotateX, rotateY, transformStyle: "preserve-3d" }}
               className="relative"
             >
               {/* back glow layers */}

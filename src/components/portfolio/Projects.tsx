@@ -33,7 +33,8 @@ function ShotButton({ shot, onOpen, className, priority }: { shot: Shot; onOpen:
 
 function Gallery({ project, onOpen }: { project: Project; onOpen: (s: Shot) => void }) {
   const [main, ...rest] = project.shots;
-  if (project.shots.length === 1) {
+  if (!main) return null;
+  if (rest.length === 0) {
     return <ShotButton shot={main} onOpen={onOpen} className="aspect-[16/10]" />;
   }
   const tall = rest.find((s) => s.ratio === "tall");

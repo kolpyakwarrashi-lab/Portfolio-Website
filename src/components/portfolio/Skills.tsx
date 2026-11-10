@@ -63,7 +63,7 @@ export function Skills() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: (i % 3) * 0.08 }}
-                whileHover={reduce ? undefined : { y: -6 }}
+                whileHover={reduce ? {} : { y: -6 }}
                 className={cn(
                   "group relative overflow-hidden rounded-3xl border bg-card p-7 shadow-soft transition-colors duration-500 hover:border-primary/40",
                   highlight && "dark bg-background text-foreground",

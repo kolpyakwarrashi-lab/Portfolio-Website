@@ -56,7 +56,7 @@ export function About() {
             <div className="absolute -inset-4 -rotate-3 rounded-[2.5rem] bg-gradient-brand-soft" aria-hidden />
             <div className="relative overflow-hidden rounded-[2rem] shadow-soft">
               <motion.img
-                style={reduce ? undefined : { y: imgY, scale: 1.12 }}
+                style={reduce ? {} : { y: imgY, scale: 1.12 }}
                 src={profile.portrait}
                 alt="Rashi at her workspace"
                 loading="lazy"

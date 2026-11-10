@@ -32,7 +32,7 @@ export function Journey() {
             <span aria-hidden className="absolute left-[11px] top-2 h-[calc(100%-1rem)] w-px bg-border" />
             <motion.span
               aria-hidden
-              style={reduce ? undefined : { scaleY }}
+              style={reduce ? {} : { scaleY }}
               className="absolute left-[11px] top-2 h-[calc(100%-1rem)] w-px origin-top bg-gradient-to-b from-primary to-sky"
             />
             {education.map((e, i) => (
