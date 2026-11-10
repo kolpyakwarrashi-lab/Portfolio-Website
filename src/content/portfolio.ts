@@ -246,10 +246,10 @@ export const moreProjects = [
 
 export const achievements = [
   { title: "Technical Advisor", org: "ISTE Committee", detail: "Selected" },
-  { title: "GirlScript Summer of Code", org: "GSSoC 2026", detail: "Selected" },
-  { title: "Student Partner", org: "Internshala", detail: "Program" },
-  { title: "AI Skills ki Yatra — Explorer", org: "Microsoft", detail: "Explorer" },
-  { title: "Front End Development", org: "Simplilearn", detail: "Completed" },
+  { title: "\n", org: "\n", detail: "" },
+  { title: "\n", org: "\n", detail: "" },
+  { title: "\n", org: "\n", detail: "" },
+  { title: "\n", org: "\n", detail: "" },
   { title: "Navonmesh 2026 — Project Expo", org: "Navonmesh", detail: "Participated" },
 ];
 
