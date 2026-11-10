@@ -1,5 +1,13 @@
 import { useRef } from "react";
-import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "motion/react";
 import { ArrowDown, ArrowUpRight, Code2, GraduationCap, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { profile } from "@/content/portfolio";
@@ -43,11 +51,7 @@ export function Hero() {
   const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-11, 11]), { stiffness: 140, damping: 18 });
   const glareX = useTransform(mx, [-0.5, 0.5], ["0%", "100%"]);
   const glareY = useTransform(my, [-0.5, 0.5], ["0%", "100%"]);
-  const glare = useTransform(
-    [glareX, glareY] as never,
-    ([x, y]: string[]) =>
-      `radial-gradient(circle at ${x} ${y}, color-mix(in oklab, var(--softwhite) 28%, transparent), transparent 55%)`,
-  );
+  const glare = useMotionTemplate`radial-gradient(circle at ${glareX} ${glareY}, color-mix(in oklab, var(--softwhite) 28%, transparent), transparent 55%)`;
 
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
   const nameY = useTransform(scrollYProgress, [0, 1], ["0%", "35%"]);
