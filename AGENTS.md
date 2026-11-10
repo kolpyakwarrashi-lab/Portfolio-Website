@@ -28,3 +28,10 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- All portfolio copy, links and image pointers live in `src/content/portfolio.ts`; sections in `src/components/portfolio/` only render it — keeps future edits in one place.
+- Page is one scrolling route (`/`) with section anchors because the user explicitly asked for smooth-scrolling nav.
+- Dark sections opt in by adding the `dark` class to the section; light sections use the root tokens — so both themes share one token set.
+- Contact form has no backend: it validates (`src/lib/contact.ts`) and opens a prefilled mailto — avoids an unnecessary backend.
+- Media is served via `.asset.json` pointers in `src/assets/`; certificates gallery renders only when `certificates` has entries.
