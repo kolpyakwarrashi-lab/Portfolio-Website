@@ -139,23 +139,23 @@ export function Hero() {
         </motion.div>
 
         {/* Copy */}
-        <div className="relative z-10 -mt-10 flex flex-col items-center text-center">
-          <motion.p
-            initial={reduce ? false : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease, delay: 0.7 }}
-            className="eyebrow text-muted-foreground"
-          >
-            {profile.fullName} — {profile.role}
-          </motion.p>
+        <div className="relative z-10 -mt-12 flex flex-col items-center text-center md:-mt-16">
           <motion.h2
             initial={reduce ? false : { opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease, delay: 0.85 }}
-            className="mt-4 font-display text-5xl font-bold leading-[0.95] sm:text-7xl md:text-8xl"
+            className="font-display text-5xl font-bold leading-[0.95] sm:text-7xl md:text-8xl"
           >
             Beyond the <span className="text-gradient">Code.</span>
           </motion.h2>
+          <motion.p
+            initial={reduce ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease, delay: 0.7 }}
+            className="eyebrow mt-5 text-muted-foreground"
+          >
+            {profile.fullName} — {profile.role}
+          </motion.p>
           <motion.p
             initial={reduce ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

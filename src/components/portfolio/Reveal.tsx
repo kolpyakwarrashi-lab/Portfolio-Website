@@ -28,30 +28,37 @@ export function Reveal({ delay = 0, y = 28, children, ...rest }: RevealProps) {
   );
 }
 
-/** Splits text into words that rise in, staggered. */
+const motionTags = { span: motion.span, h1: motion.h1, h2: motion.h2, p: motion.p };
+
+/** Splits text into words that rise in, staggered. Parent observes the viewport. */
 export function StaggerText({
   text,
   className,
   delay = 0,
-  as: Tag = "span",
+  as = "span",
 }: {
   text: string;
   className?: string;
   delay?: number;
-  as?: "span" | "h2" | "h1" | "p";
+  as?: keyof typeof motionTags;
 }) {
   const reduce = useReducedMotion();
+  const Tag = motionTags[as];
   const words = text.split(" ");
   return (
-    <Tag className={className} aria-label={text}>
+    <Tag
+      className={className}
+      aria-label={text}
+      initial={reduce ? false : "hidden"}
+      whileInView="show"
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ staggerChildren: 0.06, delayChildren: delay }}
+    >
       {words.map((w, i) => (
         <span key={i} aria-hidden className="inline-block overflow-hidden pb-[0.08em] align-bottom">
           <motion.span
             className="inline-block"
-            initial={reduce ? false : { y: "110%" }}
-            whileInView={{ y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9, ease, delay: delay + i * 0.06 }}
+            variants={{ hidden: { y: "110%" }, show: { y: 0, transition: { duration: 0.9, ease } } }}
           >
             {w}
             {i < words.length - 1 ? "\u00A0" : ""}
