@@ -35,3 +35,4 @@ use the editor.
 - Dark sections opt in by adding the `dark` class to the section; light sections use the root tokens — so both themes share one token set.
 - Contact form has no backend: it validates (`src/lib/contact.ts`) and opens a prefilled mailto — avoids an unnecessary backend.
 - Media is served via `.asset.json` pointers in `src/assets/`; certificates gallery renders only when `certificates` has entries.
+- Wrap loose text next to icons or conditionally shown elements in its own <span> — bare text nodes crash React (removeChild/insertBefore) when translators or the visual editor rewrite text.
