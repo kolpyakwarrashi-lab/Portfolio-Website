@@ -9,6 +9,9 @@ export function Achievements() {
   const reduce = useReducedMotion();
   const [open, setOpen] = useState<(typeof certificates)[number] | null>(null);
 
+  // Entries with no text left are skipped so the list never shows blank rows.
+  const entries = achievements.filter((a) => `${a.title}${a.org}${a.detail}`.trim().length > 0);
+
   return (
     <section id="achievements" className="bg-background py-28 text-foreground md:py-36">
       <div className="mx-auto max-w-6xl px-5">
@@ -20,14 +23,14 @@ export function Achievements() {
         />
 
         <ol className="mt-16 border-t">
-          {achievements.map((a, i) => (
+          {entries.map((a, i) => (
             <motion.li
               key={a.title}
               initial={reduce ? false : { opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.05 }}
-              className="group relative grid grid-cols-[3rem_1fr_auto] items-center gap-4 overflow-hidden border-b py-7 md:grid-cols-[5rem_1fr_14rem_auto] md:py-8"
+              className="group relative grid min-h-[4.5rem] grid-cols-[3rem_1fr_auto] items-center gap-4 overflow-hidden border-b py-7 md:min-h-[6rem] md:grid-cols-[5rem_1fr_14rem_auto] md:py-8"
             >
               <span
                 aria-hidden
@@ -35,15 +38,17 @@ export function Achievements() {
               />
               <span className="relative font-display text-sm text-muted-foreground">0{i + 1}</span>
               <div className="relative">
-                <h3 className="font-display text-xl font-semibold transition-transform duration-500 group-hover:translate-x-2 md:text-3xl">
-                  {a.title}
+                <h3 className="font-display text-xl font-semibold leading-snug transition-transform duration-500 group-hover:translate-x-2 md:text-3xl">
+                  {a.title.trim()}
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground md:hidden">{a.org}</p>
+                {a.org.trim() && <p className="mt-1 text-sm text-muted-foreground md:hidden">{a.org.trim()}</p>}
               </div>
-              <p className="relative hidden text-muted-foreground md:block">{a.org}</p>
-              <span className="relative flex items-center gap-2 rounded-full border bg-card px-3 py-1.5 text-xs font-medium">
-                <Award className="size-3.5 text-primary" /> {a.detail}
-              </span>
+              {a.org.trim() && <p className="relative hidden text-muted-foreground md:block">{a.org.trim()}</p>}
+              {a.detail.trim() && (
+                <span className="relative flex items-center gap-2 rounded-full border bg-card px-3 py-1.5 text-xs font-medium">
+                  <Award className="size-3.5 text-primary" /> {a.detail.trim()}
+                </span>
+              )}
             </motion.li>
           ))}
         </ol>
