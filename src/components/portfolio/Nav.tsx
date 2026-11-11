@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useScroll, useSpring } from "motion/react";
-import { Download, Menu, X } from "lucide-react";
+import { Download, Linkedin, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { navLinks, profile } from "@/content/portfolio";
+import { contact, navLinks, profile } from "@/content/portfolio";
 import { cn } from "@/lib/utils";
 
 export function Nav() {
@@ -89,23 +89,26 @@ export function Nav() {
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
                   />
                 )}
-                <span className="relative block overflow-hidden">
-                  <span className="block transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-full">
-                    {l.label}
-                  </span>
-                  <span
-                    aria-hidden
-                    className="absolute inset-0 block translate-y-full text-foreground transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-0"
-                  >
-                    {l.label}
-                  </span>
-                </span>
+                <span>{l.label}</span>
+                <span
+                  aria-hidden
+                  className="absolute inset-x-3.5 bottom-1 h-px origin-left scale-x-0 bg-gradient-brand transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100"
+                />
               </a>
             </li>
           ))}
         </ul>
 
         <div className="flex items-center gap-2">
+          <a
+            href={contact.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn profile"
+            className="glass hidden size-9 items-center justify-center rounded-full transition-colors duration-300 hover:bg-primary hover:text-primary-foreground sm:inline-flex"
+          >
+            <Linkedin className="size-4" />
+          </a>
           <Button asChild variant="hero" size="sm" className="hidden px-4 sm:inline-flex">
             <a href={profile.resumeUrl} download={profile.resumeFileName} target="_blank" rel="noopener noreferrer">
               <Download /> <span>Resume</span>
@@ -132,8 +135,13 @@ export function Nav() {
             className="glass mx-auto mt-2 max-w-6xl rounded-3xl p-4 text-foreground md:hidden"
           >
             <ul className="flex flex-col">
-              {navLinks.map((l) => (
-                <li key={l.id}>
+              {navLinks.map((l, i) => (
+                <motion.li
+                  key={l.id}
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.05 + i * 0.05 }}
+                >
                   <a
                     href={`#${l.id}`}
                     onClick={() => setOpen(false)}
@@ -141,9 +149,17 @@ export function Nav() {
                   >
                     {l.label}
                   </a>
-                </li>
+                </motion.li>
               ))}
             </ul>
+            <a
+              href={contact.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 flex items-center gap-3 rounded-2xl px-4 py-3 font-display text-lg hover:bg-accent"
+            >
+              <Linkedin className="size-5" /> <span>LinkedIn</span>
+            </a>
             <Button asChild variant="hero" size="xl" className="mt-3 w-full">
               <a href={profile.resumeUrl} download={profile.resumeFileName} target="_blank" rel="noopener noreferrer">
                 <Download /> <span>Download Resume</span>

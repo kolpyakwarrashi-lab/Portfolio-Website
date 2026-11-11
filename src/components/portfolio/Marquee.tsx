@@ -1,3 +1,6 @@
+import { motion, useScroll, useSpring, useTransform, useVelocity } from "motion/react";
+import { useReducedMotion } from "./Reveal";
+
 const words = ["Beyond the Code", "HTML", "CSS", "JavaScript", "C", "Learning React", "Building things", "Creative tech"];
 
 function Row({ reverse = false }: { reverse?: boolean }) {
@@ -10,7 +13,7 @@ function Row({ reverse = false }: { reverse?: boolean }) {
         <span
           key={i}
           className={`flex items-center gap-10 font-display font-medium ${
-            reverse ? "text-outline text-4xl md:text-6xl" : "text-2xl text-muted-foreground md:text-3xl"
+            reverse ? "text-outline text-5xl md:text-7xl" : "text-3xl text-foreground md:text-4xl"
           }`}
         >
           <span>{w}</span>
@@ -22,10 +25,16 @@ function Row({ reverse = false }: { reverse?: boolean }) {
 }
 
 export function Marquee() {
+  const reduce = useReducedMotion();
+  const { scrollY } = useScroll();
+  const velocity = useVelocity(scrollY);
+  const skewX = useSpring(useTransform(velocity, [-2500, 0, 2500], [12, 0, -12]), { stiffness: 300, damping: 40 });
   return (
-    <div className="dark space-y-3 overflow-hidden border-y bg-background py-6 text-foreground" aria-hidden>
-      <Row />
-      <Row reverse />
+    <div className="dark overflow-hidden border-y bg-background py-8 text-foreground" aria-hidden>
+      <motion.div className="space-y-4" style={reduce ? {} : { skewX }}>
+        <Row />
+        <Row reverse />
+      </motion.div>
     </div>
   );
 }

@@ -66,13 +66,18 @@ export function Tilt({ children, className, max = 6 }: { children: React.ReactNo
         const r = e.currentTarget.getBoundingClientRect();
         mx.set((e.clientX - r.left) / r.width - 0.5);
         my.set((e.clientY - r.top) / r.height - 0.5);
+        // expose pointer position for spotlight effects inside
+        e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
+        e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
       }}
       onPointerLeave={() => {
         mx.set(0);
         my.set(0);
       }}
     >
-      <motion.div style={reduce ? {} : { rotateX, rotateY, transformStyle: "preserve-3d" }}>{children}</motion.div>
+      <motion.div className="h-full" style={reduce ? {} : { rotateX, rotateY, transformStyle: "preserve-3d" }}>
+        {children}
+      </motion.div>
     </div>
   );
 }
@@ -90,6 +95,8 @@ export function Cursor() {
   const y = useMotionValue(-100);
   const sx = useSpring(x, { stiffness: 450, damping: 38, mass: 0.5 });
   const sy = useSpring(y, { stiffness: 450, damping: 38, mass: 0.5 });
+  const gx = useSpring(x, { stiffness: 90, damping: 22, mass: 0.8 });
+  const gy = useSpring(y, { stiffness: 90, damping: 22, mass: 0.8 });
   const [mode, setMode] = useState<CursorMode>("default");
   const [label, setLabel] = useState("");
   const [visible, setVisible] = useState(false);
@@ -134,25 +141,38 @@ export function Cursor() {
 
   if (!fine || reduce) return null;
 
-  const size = mode === "label" ? 84 : mode === "link" ? 56 : 30;
+  const size = mode === "label" ? 88 : mode === "link" ? 60 : 36;
   return (
-    <motion.div
-      aria-hidden
-      className="pointer-events-none fixed left-0 top-0 z-[70]"
-      style={{ x: sx, y: sy }}
-    >
-      <motion.div
-        className={cn(
-          "flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border",
-          mode === "label" ? "border-transparent bg-primary" : "border-primary/70 bg-primary/5 backdrop-blur-[1px]",
-        )}
-        animate={{ width: size, height: size, opacity: visible && mode !== "hidden" ? 1 : 0 }}
-        transition={{ type: "spring", stiffness: 300, damping: 26 }}
-      >
-        {mode === "label" && (
-          <span className="eyebrow text-[0.62rem] text-primary-foreground">{label}</span>
-        )}
+    <>
+      {/* Wide soft glow that lags behind */}
+      <motion.div aria-hidden className="pointer-events-none fixed left-0 top-0 z-[69]" style={{ x: gx, y: gy }}>
+        <motion.div
+          className="-translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-brand blur-2xl"
+          animate={{ width: mode === "default" ? 90 : 140, height: mode === "default" ? 90 : 140, opacity: visible && mode !== "hidden" ? 0.35 : 0 }}
+          transition={{ type: "spring", stiffness: 200, damping: 25 }}
+        />
       </motion.div>
-    </motion.div>
+      {/* Trailing ring */}
+      <motion.div aria-hidden className="pointer-events-none fixed left-0 top-0 z-[70]" style={{ x: sx, y: sy }}>
+        <motion.div
+          className={cn(
+            "flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border shadow-glow",
+            mode === "label" ? "border-transparent bg-gradient-brand" : "border-primary/80 bg-primary/10",
+          )}
+          animate={{ width: size, height: size, opacity: visible && mode !== "hidden" ? 1 : 0 }}
+          transition={{ type: "spring", stiffness: 300, damping: 26 }}
+        >
+          {mode === "label" && <span className="eyebrow text-[0.62rem] text-primary-foreground">{label}</span>}
+        </motion.div>
+      </motion.div>
+      {/* Precise glowing dot */}
+      <motion.div aria-hidden className="pointer-events-none fixed left-0 top-0 z-[71]" style={{ x, y }}>
+        <motion.div
+          className="size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky shadow-glow"
+          animate={{ opacity: visible && mode === "default" ? 1 : 0, scale: mode === "default" ? 1 : 0 }}
+          transition={{ duration: 0.2 }}
+        />
+      </motion.div>
+    </>
   );
 }
