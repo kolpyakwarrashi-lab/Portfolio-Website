@@ -120,7 +120,14 @@ export function SectionLabel({ index, children }: { index: string; children: str
   return (
     <div className="eyebrow flex items-center gap-3 text-muted-foreground">
       <span className="text-primary">{index}</span>
-      <span className="h-px w-10 bg-border" />
+      <motion.span
+        aria-hidden
+        className="h-px w-10 origin-left bg-gradient-brand"
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 1, ease, delay: 0.15 }}
+      />
       <span>{children}</span>
     </div>
   );

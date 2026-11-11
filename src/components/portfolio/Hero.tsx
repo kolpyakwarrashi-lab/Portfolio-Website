@@ -1,4 +1,5 @@
-import { useReducedMotion } from "./Reveal";
+import { LetterReveal, useReducedMotion } from "./Reveal";
+import { Magnetic } from "./Interactions";
 import { useRef } from "react";
 import {
   motion,
@@ -140,14 +141,13 @@ export function Hero() {
 
         {/* Copy */}
         <div className="relative z-10 -mt-12 flex flex-col items-center text-center md:-mt-16">
-          <motion.h2
-            initial={reduce ? false : { opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease, delay: 0.85 }}
+          <LetterReveal
+            as="h2"
+            onMount
+            delay={0.75}
+            text={profile.fullName}
             className="font-display text-5xl font-bold leading-[0.95] sm:text-7xl md:text-8xl"
-          >
-            Rashi Kolpyakwar
-          </motion.h2>
+          />
           <motion.p
             initial={reduce ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -170,16 +170,20 @@ export function Hero() {
             transition={{ duration: 0.9, ease, delay: 1.15 }}
             className="mt-9 flex flex-wrap items-center justify-center gap-3"
           >
-            <Button asChild variant="hero" size="xl">
-              <a href="#work">
-                <span>Explore My Work</span> <ArrowDown />
-              </a>
-            </Button>
-            <Button asChild variant="glass" size="xl">
-              <a href="#contact">
-                <span>Let's Connect</span> <ArrowUpRight />
-              </a>
-            </Button>
+            <Magnetic>
+              <Button asChild variant="hero" size="xl">
+                <a href="#work">
+                  <span>Explore My Work</span> <ArrowDown />
+                </a>
+              </Button>
+            </Magnetic>
+            <Magnetic>
+              <Button asChild variant="glass" size="xl">
+                <a href="#contact">
+                  <span>Let's Connect</span> <ArrowUpRight />
+                </a>
+              </Button>
+            </Magnetic>
           </motion.div>
         </div>
       </div>
