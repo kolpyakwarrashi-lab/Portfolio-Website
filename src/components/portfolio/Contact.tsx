@@ -6,12 +6,12 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { contact } from "@/content/portfolio";
 import { buildMailto, validateContact, type ContactInput } from "@/lib/contact";
-import { Reveal, SectionLabel, StaggerText } from "./Reveal";
+import { LetterReveal, Reveal, SectionLabel } from "./Reveal";
 import { Magnetic } from "./Interactions";
 
 const links = [
   { label: "Email", value: contact.email, href: `mailto:${contact.email}`, icon: Mail },
-  { label: "LinkedIn", value: "rashi-kolpyakwar", href: contact.linkedin, icon: Linkedin },
+  { label: "LinkedIn", value: "linkedin.com/in/rashi-kolpyakwar-1a364737b", href: contact.linkedin, icon: Linkedin },
   { label: "GitHub", value: "kolpyakwarrashi-lab", href: contact.github, icon: Github },
 ];
 
@@ -46,7 +46,7 @@ export function Contact() {
       <div className="relative mx-auto grid max-w-6xl gap-16 px-5 lg:grid-cols-12">
         <div className="lg:col-span-6">
           <SectionLabel index="06">Contact</SectionLabel>
-          <StaggerText
+          <LetterReveal
             as="h2"
             text="Let's create something meaningful."
             className="mt-6 block font-display text-5xl font-bold leading-[0.98] md:text-7xl"

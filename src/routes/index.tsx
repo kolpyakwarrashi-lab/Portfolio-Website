@@ -11,6 +11,7 @@ import { Achievements } from "@/components/portfolio/Achievements";
 import { Contact } from "@/components/portfolio/Contact";
 import { Footer } from "@/components/portfolio/Footer";
 import { Cursor } from "@/components/portfolio/Interactions";
+import { Curtain } from "@/components/portfolio/Reveal";
 
 const title = "Rashi Kolpyakwar — Beyond the Code.";
 const description =
@@ -41,11 +42,17 @@ function Index() {
       <main>
         <Hero />
         <Marquee />
-        <About />
+        <Curtain>
+          <About />
+        </Curtain>
         <Journey />
-        <Skills />
+        <Curtain>
+          <Skills />
+        </Curtain>
         <Projects />
-        <Achievements />
+        <Curtain>
+          <Achievements />
+        </Curtain>
         <Contact />
       </main>
       <Footer />
