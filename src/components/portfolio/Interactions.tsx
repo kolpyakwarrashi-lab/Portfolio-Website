@@ -111,7 +111,7 @@ export function Cursor() {
       const labelled = el?.closest<HTMLElement>("[data-cursor]");
       if (labelled) {
         setMode("label");
-        setLabel(labelled.dataset.cursor ?? "");
+        setLabel(labelled.dataset["cursor"] ?? "");
         return;
       }
       if (el?.closest("input, textarea, select")) return setMode("hidden");
