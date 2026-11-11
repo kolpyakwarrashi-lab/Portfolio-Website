@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import {
   motion,
-  useMotionTemplate,
   useReducedMotion as useMotionReducedMotion,
   useScroll,
   useTransform,
@@ -157,40 +156,52 @@ export function LetterReveal({
 /** Image that is unveiled by a rising mask, then settles from a slight zoom. */
 export function ImageReveal({ children, className, delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const reduce = useReducedMotion();
+  // The viewport is observed on the unclipped wrapper; a fully clipped element never reports as visible.
   return (
     <motion.div
-      className={cn("overflow-hidden", className)}
-      initial={reduce ? { opacity: 0 } : { clipPath: "inset(100% 0% 0% 0%)" }}
-      whileInView={reduce ? { opacity: 1 } : { clipPath: "inset(0% 0% 0% 0%)" }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 1.3, ease, delay }}
+      className={cn("relative", className)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: "-60px" }}
     >
       <motion.div
-        className="h-full w-full"
-        initial={reduce ? false : { scale: 1.25 }}
-        whileInView={{ scale: 1 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 1.6, ease, delay }}
+        className="h-full w-full overflow-hidden rounded-[inherit]"
+        variants={
+          reduce
+            ? { hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 0.8, delay } } }
+            : {
+                hidden: { clipPath: "inset(100% 0% 0% 0%)" },
+                show: { clipPath: "inset(0% 0% 0% 0%)", transition: { duration: 1.3, ease, delay } },
+              }
+        }
       >
-        {children}
+        <motion.div
+          className="h-full w-full"
+          variants={reduce ? {} : { hidden: { scale: 1.25 }, show: { scale: 1, transition: { duration: 1.6, ease, delay } } }}
+        >
+          {children}
+        </motion.div>
       </motion.div>
     </motion.div>
   );
 }
 
 /**
- * Section transition: the wrapped section opens from a rounded, inset card to full
- * width as it scrolls into view.
+ * Section transition: the wrapped section grows from a rounded, slightly smaller
+ * card to full size as it scrolls into view (scales, never clips content).
  */
 export function Curtain({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "start 0.25"] });
-  const inset = useTransform(scrollYProgress, [0, 1], [7, 0]);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "start 0.2"] });
+  const scale = useTransform(scrollYProgress, [0, 1], [0.9, 1]);
   const radius = useTransform(scrollYProgress, [0, 1], [56, 0]);
-  const clipPath = useMotionTemplate`inset(0% ${inset}% 0% ${inset}% round ${radius}px ${radius}px 0px 0px)`;
   return (
-    <motion.div ref={ref} style={reduce ? {} : { clipPath }}>
+    <motion.div
+      ref={ref}
+      className="origin-top overflow-hidden"
+      style={reduce ? {} : { scale, borderTopLeftRadius: radius, borderTopRightRadius: radius }}
+    >
       {children}
     </motion.div>
   );
