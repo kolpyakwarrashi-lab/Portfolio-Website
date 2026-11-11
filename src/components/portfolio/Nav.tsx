@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useScroll, useSpring } from "motion/react";
 import { Download, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { navLinks, profile } from "@/content/portfolio";
@@ -9,6 +9,8 @@ export function Nav() {
   const [active, setActive] = useState<string>("");
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 24, mass: 0.3 });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -31,6 +33,33 @@ export function Nav() {
   }, []);
 
   return (
+    <>
+    <motion.div
+      aria-hidden
+      className="fixed inset-x-0 top-0 z-[60] h-0.5 origin-left bg-gradient-brand"
+      style={{ scaleX: progress }}
+    />
+    <nav
+      aria-label="Section indicator"
+      className="fixed right-5 top-1/2 z-40 hidden -translate-y-1/2 xl:block"
+    >
+      <ul className="flex flex-col items-end gap-3">
+        {navLinks.map((l) => (
+          <li key={l.id}>
+            <a href={`#${l.id}`} className="group flex items-center gap-3 py-0.5" aria-label={l.label}>
+              <span className="dark glass pointer-events-none translate-x-2 rounded-full px-2.5 py-1 text-xs text-foreground opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+                {l.label}
+              </span>
+              <motion.span
+                className={cn("block w-1.5 rounded-full", active === l.id ? "bg-gradient-brand" : "bg-primary/35 group-hover:bg-primary/70")}
+                animate={{ height: active === l.id ? 26 : 6 }}
+                transition={{ type: "spring", stiffness: 380, damping: 30 }}
+              />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
     <header className="dark fixed inset-x-0 top-0 z-50 px-4 pt-4">
       <nav
         aria-label="Main"
@@ -49,7 +78,7 @@ export function Nav() {
               <a
                 href={`#${l.id}`}
                 className={cn(
-                  "relative rounded-full px-3.5 py-2 text-sm transition-colors",
+                  "group relative rounded-full px-3.5 py-2 text-sm transition-colors",
                   active === l.id ? "text-foreground" : "text-muted-foreground hover:text-foreground",
                 )}
               >
@@ -60,7 +89,17 @@ export function Nav() {
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
                   />
                 )}
-                <span>{l.label}</span>
+                <span className="relative block overflow-hidden">
+                  <span className="block transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-full">
+                    {l.label}
+                  </span>
+                  <span
+                    aria-hidden
+                    className="absolute inset-0 block translate-y-full text-foreground transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-0"
+                  >
+                    {l.label}
+                  </span>
+                </span>
               </a>
             </li>
           ))}
@@ -68,7 +107,7 @@ export function Nav() {
 
         <div className="flex items-center gap-2">
           <Button asChild variant="hero" size="sm" className="hidden px-4 sm:inline-flex">
-            <a href={profile.resumeUrl} download={profile.resumeFileName} target="_blank" rel="noreferrer">
+            <a href={profile.resumeUrl} download={profile.resumeFileName} target="_blank" rel="noopener noreferrer">
               <Download /> <span>Resume</span>
             </a>
           </Button>
@@ -106,7 +145,7 @@ export function Nav() {
               ))}
             </ul>
             <Button asChild variant="hero" size="xl" className="mt-3 w-full">
-              <a href={profile.resumeUrl} download={profile.resumeFileName} target="_blank" rel="noreferrer">
+              <a href={profile.resumeUrl} download={profile.resumeFileName} target="_blank" rel="noopener noreferrer">
                 <Download /> <span>Download Resume</span>
               </a>
             </Button>
@@ -114,5 +153,6 @@ export function Nav() {
         )}
       </AnimatePresence>
     </header>
+    </>
   );
 }

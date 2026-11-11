@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { moreProjects, projects, type Project, type Shot } from "@/content/portfolio";
 import { cn } from "@/lib/utils";
 import { Reveal, SectionLabel, StaggerText, useReducedMotion } from "./Reveal";
+import { Magnetic, Tilt } from "./Interactions";
 
 function ShotButton({ shot, onOpen, className, priority }: { shot: Shot; onOpen: (s: Shot) => void; className?: string; priority?: boolean }) {
   return (
@@ -17,12 +18,17 @@ function ShotButton({ shot, onOpen, className, priority }: { shot: Shot; onOpen:
         className,
       )}
       aria-label={`View larger: ${shot.alt}`}
+      data-cursor="View"
     >
       <img
         src={shot.src}
         alt={shot.alt}
         loading={priority ? "eager" : "lazy"}
         className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover/shot:scale-[1.04]"
+      />
+      <span
+        aria-hidden
+        className="absolute inset-0 bg-gradient-to-t from-background/70 via-background/10 to-transparent opacity-0 transition-opacity duration-500 group-hover/shot:opacity-100"
       />
       <span className="glass absolute bottom-3 right-3 flex size-9 items-center justify-center rounded-full opacity-0 transition-opacity duration-300 group-hover/shot:opacity-100">
         <Expand className="size-4" />
@@ -66,7 +72,9 @@ function ProjectCard({ project, onOpen, flip }: { project: Project; onOpen: (s: 
     >
       <div className={cn("grid gap-8 lg:grid-cols-12 lg:items-start", flip && "lg:[&>*:first-child]:order-2")}>
         <div className="lg:col-span-7">
-          <Gallery project={project} onOpen={onOpen} />
+          <Tilt max={5}>
+            <Gallery project={project} onOpen={onOpen} />
+          </Tilt>
         </div>
 
         <div className="flex flex-col p-2 lg:col-span-5 lg:p-4">
@@ -82,7 +90,7 @@ function ProjectCard({ project, onOpen, flip }: { project: Project; onOpen: (s: 
               {project.status}
             </span>
           </div>
-          <h3 className="mt-5 font-display text-4xl font-bold md:text-5xl">{project.title}</h3>
+          <StaggerText as="h3" text={project.title} className="mt-5 block font-display text-4xl font-bold md:text-5xl" />
           <p className="mt-2 text-muted-foreground">{project.subtitle}</p>
 
           <dl className="mt-8 space-y-5 text-sm">
@@ -120,22 +128,26 @@ function ProjectCard({ project, onOpen, flip }: { project: Project; onOpen: (s: 
 
           <div className="mt-8 flex flex-wrap gap-3">
             {project.live ? (
-              <Button asChild variant="hero" size="xl">
-                <a href={project.live} target="_blank" rel="noreferrer">
-                  <span>Live Demo</span> <ArrowUpRight />
-                </a>
-              </Button>
+              <Magnetic>
+                <Button asChild variant="hero" size="xl">
+                  <a href={project.live} target="_blank" rel="noopener noreferrer">
+                    <span>Live Demo</span> <ArrowUpRight />
+                  </a>
+                </Button>
+              </Magnetic>
             ) : (
               <span className="inline-flex h-12 items-center rounded-full border border-dashed px-6 text-sm text-muted-foreground">
                 Demo coming soon
               </span>
             )}
             {project.github && (
-              <Button asChild variant="glass" size="xl">
-                <a href={project.github} target="_blank" rel="noreferrer">
-                  <Github /> <span>GitHub</span>
-                </a>
-              </Button>
+              <Magnetic>
+                <Button asChild variant="glass" size="xl">
+                  <a href={project.github} target="_blank" rel="noopener noreferrer">
+                    <Github /> <span>GitHub</span>
+                  </a>
+                </Button>
+              </Magnetic>
             )}
           </div>
         </div>
