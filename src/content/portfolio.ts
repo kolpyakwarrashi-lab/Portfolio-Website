@@ -32,7 +32,7 @@ export const profile = {
 
 export const contact = {
   email: "kolpyakwarrashi@gmail.com",
-  linkedin: "https://www.linkedin.com/in/rashi-kolpyakwar-1a364737b",
+  linkedin: "https://www.linkedin.com/in/rashi-kolpyakwar-1a364737b/",
   github: "https://github.com/kolpyakwarrashi-lab",
 };
 

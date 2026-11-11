@@ -10,6 +10,7 @@ import { Projects } from "@/components/portfolio/Projects";
 import { Achievements } from "@/components/portfolio/Achievements";
 import { Contact } from "@/components/portfolio/Contact";
 import { Footer } from "@/components/portfolio/Footer";
+import { Cursor } from "@/components/portfolio/Interactions";
 
 const title = "Rashi Kolpyakwar — Beyond the Code.";
 const description =
@@ -35,6 +36,7 @@ function Index() {
       <a href="#about" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground">
         Skip to content
       </a>
+      <Cursor />
       <Nav />
       <main>
         <Hero />

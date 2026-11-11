@@ -140,7 +140,7 @@
 
 @layer base {
   * {
-    border-color: var(--color-border);
+    border-color: var(--border);
   }
   html {
     scroll-behavior: smooth;
@@ -246,6 +246,10 @@
   animation: marquee 40s linear infinite;
 }
 
+@utility marquee-reverse {
+  animation: marquee 55s linear infinite reverse;
+}
+
 @keyframes aurora-drift {
   0% { background-position: 0% 0%; }
   50% { background-position: 60% 40%; }
@@ -258,5 +262,5 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .aurora, .marquee { animation: none; }
+  .aurora, .marquee, .marquee-reverse { animation: none; }
 }

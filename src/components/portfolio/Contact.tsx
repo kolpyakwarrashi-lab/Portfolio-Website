@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { contact } from "@/content/portfolio";
 import { buildMailto, validateContact, type ContactInput } from "@/lib/contact";
 import { Reveal, SectionLabel, StaggerText } from "./Reveal";
+import { Magnetic } from "./Interactions";
 
 const links = [
   { label: "Email", value: contact.email, href: `mailto:${contact.email}`, icon: Mail },
@@ -62,10 +63,10 @@ export function Contact() {
                   <a
                     href={l.href}
                     target={l.href.startsWith("mailto") ? undefined : "_blank"}
-                    rel="noreferrer"
-                    className="group flex items-center gap-5 py-5"
+                    rel={l.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+                    className="group flex items-center gap-5 py-5 transition-[padding] duration-500 hover:pl-2"
                   >
-                    <span className="flex size-11 items-center justify-center rounded-full glass transition-colors group-hover:border-primary/60">
+                    <span className="flex size-11 items-center justify-center rounded-full glass transition-all duration-500 group-hover:scale-110 group-hover:border-primary/60 group-hover:bg-primary group-hover:text-primary-foreground">
                       <l.icon className="size-4.5" />
                     </span>
                     <span className="flex-1">
@@ -107,13 +108,15 @@ export function Contact() {
               </div>
             </div>
 
-            <Button type="submit" variant="hero" size="xl" className="mt-8 w-full">
+            <Magnetic strength={0.12} className="mt-8 flex w-full">
+            <Button type="submit" variant="hero" size="xl" className="w-full">
               {sent ? (
                 <span key="sent" className="inline-flex items-center gap-2"><Check /><span>Opening your email app</span></span>
               ) : (
                 <span key="send" className="inline-flex items-center gap-2"><span>Send message</span><Send /></span>
               )}
             </Button>
+            </Magnetic>
             {sent && (
               <p role="status" className="mt-4 text-center text-sm text-muted-foreground">
                 If nothing opened, email me directly at{" "}

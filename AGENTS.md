@@ -36,3 +36,5 @@ use the editor.
 - Contact form has no backend: it validates (`src/lib/contact.ts`) and opens a prefilled mailto — avoids an unnecessary backend.
 - Media is served via `.asset.json` pointers in `src/assets/`; certificates gallery renders only when `certificates` has entries.
 - Wrap loose text next to icons or conditionally shown elements in its own <span> — bare text nodes crash React (removeChild/insertBefore) when translators or the visual editor rewrite text.
+- Pointer effects (custom cursor, magnetic, tilt) live in `src/components/portfolio/Interactions.tsx` and only activate for a fine mouse pointer without reduced motion — keeps touch devices and accessibility settings unaffected.
+- Scroll and reveal animations use `motion` only (no GSAP) — avoids a second animation library for effects motion already covers.
