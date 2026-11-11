@@ -132,7 +132,7 @@ export function LetterReveal({
               <span key={ci} className="inline-block overflow-hidden pb-[0.1em] align-bottom">
                 <motion.span
                   className={cn("inline-block", shimmer && "text-shimmer")}
-                  style={shimmer ? { animationDelay: `${idx * 0.09}s` } : undefined}
+                  style={shimmer ? { animationDelay: `${idx * 0.09}s` } : {}}
                   variants={
                     reduce
                       ? { hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 0.5 } } }
