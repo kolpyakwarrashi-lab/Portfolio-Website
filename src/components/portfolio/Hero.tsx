@@ -21,7 +21,6 @@ function Chip({ children, className, delay }: { children: React.ReactNode; class
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ duration: 0.9, ease, delay }}
       className={`glass absolute z-20 flex items-center gap-2 rounded-full px-3.5 py-2 text-xs font-medium text-foreground shadow-glow ${className}`}
-      style={{ transform: "translateZ(60px)" }}
     >
       <motion.span
         className="flex items-center gap-2"
