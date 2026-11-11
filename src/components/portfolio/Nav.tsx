@@ -78,7 +78,7 @@ export function Nav() {
               <a
                 href={`#${l.id}`}
                 className={cn(
-                  "group relative rounded-full px-3.5 py-2 text-sm transition-colors",
+                  "group relative inline-block rounded-full px-3.5 py-2 text-sm transition-colors",
                   active === l.id ? "text-foreground" : "text-muted-foreground hover:text-foreground",
                 )}
               >
