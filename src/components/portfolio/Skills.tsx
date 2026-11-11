@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { Code2, LayoutTemplate, Palette, Sprout, Users, Wrench } from "lucide-react";
 import { skillGroups, skillLevelLabel, type SkillLevel } from "@/content/portfolio";
 import { cn } from "@/lib/utils";
-import { Reveal, SectionLabel, StaggerText, useReducedMotion } from "./Reveal";
+import { ease, Reveal, SectionLabel, StaggerText, useReducedMotion } from "./Reveal";
 
 const icons = { code: Code2, layout: LayoutTemplate, wrench: Wrench, palette: Palette, sprout: Sprout, users: Users };
 
@@ -11,10 +11,17 @@ function LevelMeter({ level }: { level: SkillLevel }) {
     <span className="flex items-center gap-2.5" aria-label={skillLevelLabel[level]}>
       <span className="flex gap-1" aria-hidden>
         {[1, 2, 3].map((n) => (
-          <span
-            key={n}
-            className={cn("h-1.5 w-4 rounded-full", n <= level ? "bg-gradient-brand" : "bg-border")}
-          />
+          <span key={n} className="h-1.5 w-4 overflow-hidden rounded-full bg-border">
+            {n <= level && (
+              <motion.span
+                className="block h-full w-full origin-left rounded-full bg-gradient-brand"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease, delay: 0.3 + n * 0.15 }}
+              />
+            )}
+          </span>
         ))}
       </span>
       <span className="w-16 text-right text-xs text-muted-foreground">{skillLevelLabel[level]}</span>
@@ -59,11 +66,16 @@ export function Skills() {
             return (
               <motion.article
                 key={g.title}
-                initial={reduce ? false : { opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={reduce ? { opacity: 0 } : { opacity: 0, y: 70, rotate: i % 2 ? 3 : -3, filter: "blur(8px)" }}
+                whileInView={{ opacity: 1, y: 0, rotate: 0, filter: "blur(0px)" }}
                 viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: (i % 3) * 0.08 }}
-                whileHover={reduce ? {} : { y: -6 }}
+                transition={{ duration: 0.9, ease, delay: (i % 3) * 0.12 }}
+                whileHover={reduce ? {} : { y: -10 }}
+                onPointerMove={(e) => {
+                  const r = e.currentTarget.getBoundingClientRect();
+                  e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
+                  e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
+                }}
                 className={cn(
                   "group relative overflow-hidden rounded-3xl border bg-card p-7 shadow-soft transition-colors duration-500 hover:border-primary/40",
                   highlight && "dark bg-background text-foreground",
@@ -71,7 +83,11 @@ export function Skills() {
               >
                 <div
                   aria-hidden
-                  className="absolute -right-16 -top-16 size-40 rounded-full bg-gradient-brand opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-30"
+                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  style={{
+                    background:
+                      "radial-gradient(320px circle at var(--mx, 50%) var(--my, 0%), color-mix(in oklab, var(--electric) 22%, transparent), transparent 70%)",
+                  }}
                 />
                 <div className="relative flex items-center justify-between">
                   <span className="flex size-11 items-center justify-center rounded-2xl bg-accent text-primary transition-transform duration-500 group-hover:rotate-[-8deg] group-hover:scale-110">

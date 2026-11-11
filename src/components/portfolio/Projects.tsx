@@ -106,7 +106,7 @@ function ProjectCard({ project, onOpen, flip }: { project: Project; onOpen: (s: 
         {/* Animated gradient border + mouse-follow lighting */}
         <div className="group relative rounded-[2rem] p-px">
           <div aria-hidden className="border-spin absolute inset-0 rounded-[2rem] opacity-40 transition-opacity duration-700 group-hover:opacity-100" />
-          <article className="relative overflow-hidden rounded-[calc(2rem-1px)] bg-card p-4 backdrop-blur-xl md:p-6">
+          <article className="relative overflow-hidden rounded-[calc(2rem-1px)] bg-surface p-4 md:p-6">
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"

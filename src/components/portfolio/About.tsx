@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { profile } from "@/content/portfolio";
-import { Reveal, SectionLabel, StaggerText, useReducedMotion } from "./Reveal";
+import { ease, ImageReveal, Reveal, SectionLabel, StaggerText, useReducedMotion } from "./Reveal";
 
 const facts = [
   { k: "Studying", v: "B.E. Computer Science & Engineering" },
@@ -41,11 +41,18 @@ export function About() {
 
           <Reveal delay={0.2}>
             <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border bg-border md:grid-cols-4">
-              {facts.map((f) => (
-                <div key={f.k} className="bg-card p-5">
+              {facts.map((f, i) => (
+                <motion.div
+                  key={f.k}
+                  className="bg-card p-5 transition-colors duration-300 hover:bg-accent"
+                  initial={reduce ? { opacity: 0 } : { opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, ease, delay: 0.2 + i * 0.1 }}
+                >
                   <dt className="eyebrow text-muted-foreground">{f.k}</dt>
                   <dd className="mt-2 font-display text-sm font-medium leading-snug">{f.v}</dd>
-                </div>
+                </motion.div>
               ))}
             </dl>
           </Reveal>
@@ -53,8 +60,15 @@ export function About() {
 
         <div className="relative md:col-span-5">
           <Reveal className="relative mx-auto max-w-sm md:mt-16">
-            <div className="absolute -inset-4 -rotate-3 rounded-[2.5rem] bg-gradient-brand-soft" aria-hidden />
-            <div className="relative overflow-hidden rounded-[2rem] shadow-soft">
+            <motion.div
+              className="absolute -inset-4 rounded-[2.5rem] bg-gradient-brand-soft"
+              aria-hidden
+              initial={{ rotate: 0, opacity: 0 }}
+              whileInView={{ rotate: -4, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.4, ease, delay: 0.4 }}
+            />
+            <ImageReveal className="relative rounded-[2rem] shadow-soft">
               <motion.img
                 style={reduce ? {} : { y: imgY, scale: 1.12 }}
                 src={profile.portrait}
@@ -62,7 +76,7 @@ export function About() {
                 loading="lazy"
                 className="aspect-[4/5] w-full object-cover object-[50%_30%]"
               />
-            </div>
+            </ImageReveal>
             <figcaption className="relative mt-5 flex items-center justify-between text-sm text-muted-foreground">
               <span className="font-display font-medium text-foreground">Curious by default.</span>
               <span>Shegaon · 2026</span>
