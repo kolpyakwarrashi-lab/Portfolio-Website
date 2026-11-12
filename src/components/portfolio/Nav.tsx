@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useScroll, useSpring } from "motion/react";
 import { Download, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { contact, navLinks, profile } from "@/content/portfolio";
+import { navLinks, profile } from "@/content/portfolio";
 import { cn } from "@/lib/utils";
 
 export function Nav() {
