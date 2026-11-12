@@ -128,7 +128,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
           transition={{ duration: 1.4, ease, delay: 0.15 }}
         >
-          <div onPointerMove={onMove} onPointerLeave={onLeave} className="relative">
+          <div onPointerMove={onMove} onPointerLeave={onLeave} className="group/portrait relative">
             <motion.div
               style={reduce ? {} : { rotateX, rotateY, transformStyle: "preserve-3d" }}
               className="relative"
@@ -146,7 +146,7 @@ export function Hero() {
                 <img
                   src={profile.portrait}
                   alt="Portrait of Rashi Kolpyakwar smiling at her desk"
-                  className="h-full w-full object-cover object-[50%_25%]"
+                  className="h-full w-full object-cover object-[50%_25%] transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/portrait:scale-[1.05]"
                   fetchPriority="high"
                   width={1199}
                   height={1312}
@@ -225,7 +225,7 @@ export function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn profile"
-                className="glass flex size-12 items-center justify-center rounded-full transition-colors duration-300 hover:bg-primary hover:text-primary-foreground"
+                className="glass social-icon flex size-12 items-center justify-center rounded-full"
               >
                 <Linkedin className="size-5" />
               </a>
@@ -236,7 +236,7 @@ export function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub profile"
-                className="glass flex size-12 items-center justify-center rounded-full transition-colors duration-300 hover:bg-primary hover:text-primary-foreground"
+                className="glass social-icon flex size-12 items-center justify-center rounded-full"
               >
                 <Github className="size-5" />
               </a>

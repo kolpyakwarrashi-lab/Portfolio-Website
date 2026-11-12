@@ -25,7 +25,7 @@ export function Footer() {
                     href={s.href}
                     aria-label={s.label}
                     {...(s.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className="flex size-12 items-center justify-center rounded-full glass transition-colors duration-300 hover:border-primary/60 hover:bg-primary hover:text-primary-foreground"
+                    className="glass social-icon flex size-12 items-center justify-center rounded-full"
                   >
                     <s.icon className="size-5" />
                   </a>
