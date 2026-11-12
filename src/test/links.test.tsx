@@ -4,8 +4,7 @@ import { contact } from "@/content/portfolio";
 import { Contact } from "@/components/portfolio/Contact";
 import { Footer } from "@/components/portfolio/Footer";
 import { Hero } from "@/components/portfolio/Hero";
-
-const LINKEDIN = "https://www.linkedin.com/in/rashi-kolpyakwar-1a364737b/";
+import { Nav } from "@/components/portfolio/Nav";
 
 beforeAll(() => {
   class IO {
@@ -19,23 +18,32 @@ beforeAll(() => {
   Object.defineProperty(window, "IntersectionObserver", { writable: true, value: IO });
 });
 
-describe("LinkedIn links", () => {
-  it("uses Rashi's exact LinkedIn profile URL", () => {
-    expect(contact.linkedin).toBe(LINKEDIN);
+describe("Social links", () => {
+  it.each([
+    ["Nav", Nav],
+    ["Hero", Hero],
+    ["Contact", Contact],
+    ["Footer", Footer],
+  ])("%s has no LinkedIn links", (_, Section) => {
+    const { container } = render(<Section />);
+    expect(container.querySelectorAll("a[href*='linkedin']").length).toBe(0);
+    expect(container.innerHTML.toLowerCase()).not.toContain("linkedin");
   });
 
   it.each([
     ["Hero", Hero],
     ["Contact", Contact],
     ["Footer", Footer],
-  ])("every LinkedIn link in %s opens the exact profile in a new tab", (_, Section) => {
+  ])("%s keeps the GitHub link", (_, Section) => {
     const { container } = render(<Section />);
-    const links = [...container.querySelectorAll<HTMLAnchorElement>("a[href*='linkedin']")];
-    expect(links.length).toBeGreaterThan(0);
-    for (const a of links) {
-      expect(a.getAttribute("href")).toBe(LINKEDIN);
-      expect(a.getAttribute("target")).toBe("_blank");
-      expect(a.getAttribute("rel")).toBe("noopener noreferrer");
-    }
+    expect(container.querySelector(`a[href='${contact.github}']`)).not.toBeNull();
+  });
+
+  it.each([
+    ["Contact", Contact],
+    ["Footer", Footer],
+  ])("%s keeps the email link", (_, Section) => {
+    const { container } = render(<Section />);
+    expect(container.querySelector(`a[href='mailto:${contact.email}']`)).not.toBeNull();
   });
 });

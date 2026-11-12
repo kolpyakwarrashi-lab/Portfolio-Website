@@ -1,11 +1,10 @@
-import { ArrowUp, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowUp, Github, Mail } from "lucide-react";
 import { contact, profile } from "@/content/portfolio";
 import { Reveal } from "./Reveal";
 import { Magnetic } from "./Interactions";
 
 const socials = [
   { label: "Email", href: `mailto:${contact.email}`, icon: Mail, external: false },
-  { label: "LinkedIn", href: contact.linkedin, icon: Linkedin, external: true },
   { label: "GitHub", href: contact.github, icon: Github, external: true },
 ];
 
