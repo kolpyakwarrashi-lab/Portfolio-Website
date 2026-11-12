@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowUpRight, Check, Github, Linkedin, Mail, Send } from "lucide-react";
+import { ArrowUpRight, Check, Github, Mail, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,7 +11,6 @@ import { Magnetic } from "./Interactions";
 
 const links = [
   { label: "Email", value: contact.email, href: `mailto:${contact.email}`, icon: Mail },
-  { label: "LinkedIn", value: "linkedin.com/in/rashi-kolpyakwar-1a364737b", href: contact.linkedin, icon: Linkedin },
   { label: "GitHub", value: "kolpyakwarrashi-lab", href: contact.github, icon: Github },
 ];
 

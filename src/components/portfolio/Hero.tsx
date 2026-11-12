@@ -7,7 +7,7 @@ import {
   useSpring,
   useTransform,
 } from "motion/react";
-import { ArrowDown, ArrowUpRight, Code2, Github, GraduationCap, Linkedin, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Code2, Github, GraduationCap, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { contact, profile } from "@/content/portfolio";
 import { ease, LetterReveal, StaggerText, useReducedMotion } from "./Reveal";
@@ -218,17 +218,6 @@ export function Hero() {
                   <span>Let's Connect</span> <ArrowUpRight />
                 </a>
               </Button>
-            </Magnetic>
-            <Magnetic strength={0.45}>
-              <a
-                href={contact.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn profile"
-                className="glass social-icon flex size-12 items-center justify-center rounded-full"
-              >
-                <Linkedin className="size-5" />
-              </a>
             </Magnetic>
             <Magnetic strength={0.45}>
               <a
