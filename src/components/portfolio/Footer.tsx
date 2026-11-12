@@ -34,7 +34,7 @@ export function Footer() {
           </ul>
         </Reveal>
         <p aria-hidden className="mt-14 select-none text-center font-display text-[18vw] font-bold leading-[0.8] text-outline md:text-[12rem]">
-          KOLPYAKWAR
+          {"\n"}
         </p>
         <div className="flex flex-col items-center justify-between gap-4 border-t py-8 text-sm text-muted-foreground md:flex-row">
           <p>
