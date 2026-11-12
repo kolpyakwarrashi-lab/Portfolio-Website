@@ -326,6 +326,18 @@
   animation: twinkle 3.2s ease-in-out infinite;
 }
 
+/* Social icon hover: lift, tilt and glow */
+@utility social-icon {
+  transition: transform 0.5s var(--ease-premium), box-shadow 0.5s var(--ease-premium), background-color 0.3s, color 0.3s, border-color 0.3s;
+  &:hover, &:focus-visible {
+    transform: translateY(-4px) rotate(-10deg) scale(1.08);
+    box-shadow: var(--shadow-glow);
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+}
+
 @keyframes shimmer {
   0% { background-position: 100% 0; }
   60%, 100% { background-position: 0% 0; }
@@ -365,4 +377,5 @@
     animation: none;
   }
   .text-shimmer { animation-duration: 9s; }
+  .social-icon:hover, .social-icon:focus-visible { transform: none; }
 }

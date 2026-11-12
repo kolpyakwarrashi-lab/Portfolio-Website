@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { profile } from "@/content/portfolio";
 import { ease, ImageReveal, Reveal, SectionLabel, StaggerText, useReducedMotion } from "./Reveal";
+import { Tilt } from "./Interactions";
 
 const facts = [
   { k: "Studying", v: "B.E. Computer Science & Engineering" },
@@ -15,6 +16,8 @@ export function About() {
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const imgY = useTransform(scrollYProgress, [0, 1], ["8%", "-8%"]);
+  // Zooms in gently as the photo travels up the screen
+  const imgScale = useTransform(scrollYProgress, [0, 0.55, 1], [1.32, 1.12, 1.2]);
 
   return (
     <section id="about" className="relative overflow-hidden bg-background py-28 text-foreground md:py-36">
@@ -68,15 +71,37 @@ export function About() {
               viewport={{ once: true }}
               transition={{ duration: 1.4, ease, delay: 0.4 }}
             />
-            <ImageReveal className="relative rounded-[2rem] shadow-soft">
-              <motion.img
-                style={reduce ? {} : { y: imgY, scale: 1.12 }}
-                src={profile.portrait}
-                alt="Rashi at her workspace"
-                loading="lazy"
-                className="aspect-[4/5] w-full object-cover object-[50%_30%]"
-              />
-            </ImageReveal>
+            <Tilt max={8} className="group/photo relative">
+              <div className="relative rounded-[2rem] p-[2px] shadow-soft transition-shadow duration-700 group-hover/photo:shadow-glow">
+                {/* Animated gradient border */}
+                <div aria-hidden className="border-spin absolute inset-0 rounded-[2rem] opacity-70 transition-opacity duration-700 group-hover/photo:opacity-100" />
+                <ImageReveal className="relative rounded-[calc(2rem-2px)] bg-muted">
+                  <div className="h-full w-full transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/photo:rotate-[1.5deg] group-hover/photo:scale-[1.06]">
+                    <motion.img
+                      style={reduce ? {} : { y: imgY, scale: imgScale }}
+                      src={profile.portrait}
+                      alt="Rashi at her workspace"
+                      loading="lazy"
+                      className="aspect-[4/5] w-full object-cover object-[50%_30%]"
+                    />
+                  </div>
+                  {/* Light that follows the mouse */}
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 opacity-0 mix-blend-soft-light transition-opacity duration-500 group-hover/photo:opacity-100"
+                    style={{
+                      background:
+                        "radial-gradient(420px circle at var(--mx, 50%) var(--my, 30%), color-mix(in oklab, var(--softwhite) 45%, transparent), transparent 60%)",
+                    }}
+                  />
+                  {/* Hover overlay along the bottom edge only, so the face stays clear */}
+                  <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background/70 to-transparent opacity-0 transition-opacity duration-500 group-hover/photo:opacity-100" />
+                  <span className="glass absolute bottom-4 left-4 translate-y-4 rounded-full px-3 py-1.5 text-xs font-medium opacity-0 transition-all duration-500 group-hover/photo:translate-y-0 group-hover/photo:opacity-100">
+                    {`${profile.collegeShort} · ${profile.year}`}
+                  </span>
+                </ImageReveal>
+              </div>
+            </Tilt>
             <figcaption className="relative mt-5 flex items-center justify-between text-sm text-muted-foreground">
               <span className="font-display font-medium text-foreground">Curious by default.</span>
               <span>Shegaon · 2026</span>

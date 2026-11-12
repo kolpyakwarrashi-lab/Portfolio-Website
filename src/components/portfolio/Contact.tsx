@@ -66,7 +66,7 @@ export function Contact() {
                     rel={l.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
                     className="group flex items-center gap-5 py-5 transition-[padding] duration-500 hover:pl-2"
                   >
-                    <span className="flex size-11 items-center justify-center rounded-full glass transition-all duration-500 group-hover:scale-110 group-hover:border-primary/60 group-hover:bg-primary group-hover:text-primary-foreground">
+                    <span className="flex size-11 items-center justify-center rounded-full glass transition-all duration-500 group-hover:-rotate-[10deg] group-hover:scale-110 group-hover:border-primary/60 group-hover:shadow-glow group-hover:bg-primary group-hover:text-primary-foreground">
                       <l.icon className="size-4.5" />
                     </span>
                     <span className="flex-1">

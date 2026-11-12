@@ -24,7 +24,7 @@ function ShotButton({
       type="button"
       onClick={() => onOpen(shot)}
       className={cn(
-        "group/shot relative block h-full w-full overflow-hidden rounded-2xl border bg-muted text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+        "group/shot relative block h-full w-full overflow-hidden rounded-2xl border bg-muted text-left transition-[border-color,box-shadow] duration-500 hover:border-primary/60 hover:shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         className,
       )}
       aria-label={`View larger: ${shot.alt}`}
@@ -34,7 +34,7 @@ function ShotButton({
         src={shot.src}
         alt={shot.alt}
         loading="lazy"
-        className="h-full w-full object-cover object-top transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/shot:scale-[1.09]"
+        className="h-full w-full object-cover object-top transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/shot:rotate-[0.8deg] group-hover/shot:scale-[1.09]"
       />
       <span
         aria-hidden
